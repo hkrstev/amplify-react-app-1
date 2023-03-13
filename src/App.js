@@ -10,15 +10,18 @@ function App() {
   // Create coins variable and set to empty array
   const [coins, updateCoins] = useState([])
   const [input, updateInput] = useState({ limit: 5, start: 0 })
+  const [loading, updateLoading] = useState (true);
 
   function updateInputValues(type, value) {
     updateInput({ ...input, [type]: value })
   }
 
   async function fetchCoins() {
+    updateLoading(true);
     const { limit, start } = input
     const data = await API.get('cryptoapi', `/coins?limit=${limit}&start=${start}`)
     updateCoins(data.coins)
+    updateLoading(false);
   }
 
   // Define function to all API
@@ -40,8 +43,9 @@ function App() {
 />
 
 <button onClick={fetchCoins}>Fetch Coins</button>
+      {loading && <h2> Loading... </h2>}
       {
-        coins.map((coin, index) => (
+        !loading && coins.map((coin, index) => (
           <div key={index}>
             <h2>{coin.name} - {coin.symbol}</h2>
             <h5>${coin.price_usd}</h5>
