@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react'
 
 // Import the API category from AWS Amplify
 import { API } from 'aws-amplify'
-
 import './App.css';
+import { GitHubBorn } from './githubborn';
 
 function App() {
   // Create coins variable and set to empty array
@@ -50,8 +50,11 @@ function App() {
             <h2>{coin.name} - {coin.symbol}</h2>
             <h5>${coin.price_usd}</h5>
           </div>
+          
         ))
+        
       }
+      <GitHubBorn />
     </div>
   );
 }

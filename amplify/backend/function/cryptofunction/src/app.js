@@ -50,6 +50,19 @@ app.get('/coins', function(req, res) {
     .catch(err => res.json({ error: err }))
 })
 
+app.get("/born", function (req, res) {
+	// Define base url
+	let apiUrl = `https://api.github.com/users/hkrstev`;
+
+	// Call API and return response
+	axios
+		.get(apiUrl)
+		.then((response) => {
+			res.json({ born: response.data });
+		})
+		.catch((err) => res.json({ error: err }));
+});
+
 app.get('/item', function(req, res) {
   // Add your code here
   res.json({success: 'get call succeed!', url: req.url});
